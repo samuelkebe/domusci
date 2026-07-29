@@ -1,108 +1,263 @@
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/lucide.dart';
-import '../../models/user.dart';
-import '../../ressources/app_colors.dart';
-import '../../ressources/app_spacing.dart';
-import '../../ressources/app_text_styles.dart';
-import '../auth/login_view.dart';
-import '../history/history_view.dart';
-import '../listings/listings_view.dart';
-import '../payments/payments_view.dart';
-import '../settings/settings_view.dart';
-import '../widgets/badges/domus_badge.dart';
-import '../widgets/buttons/secondary_button.dart';
+import '../../components/primary_button.dart';
+import '../../resources/color.dart';
+import '../../utils/langue_provider.dart';
+import '../../utils/theme_provider.dart';
+import '../../views-models/auth_view_model.dart';
 
-/// Vue — Profil : informations personnelles, accès aux sections du compte.
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+
+class ProfilView extends StatefulWidget {
+  const ProfilView({super.key});
+
+  @override
+  State<ProfilView> createState() => _ProfilViewState();
+}
+
+class _ProfilViewState extends State<ProfilView> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final user = AppUser.demo;
-    return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 110),
-        children: [
-          Row(
-            children: [
-              ClipRRect(borderRadius: BorderRadius.circular(20), child: Image.network(user.avatarUrl, width: 66, height: 66, fit: BoxFit.cover)),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(user.fullName, style: AppTextStyles.h3),
-                    Text(user.phone, style: AppTextStyles.bodySm),
-                    const SizedBox(height: 6),
-                    if (user.isVerified) const StatusPill(label: 'Compte vérifié', color: AppColors.success),
-                  ],
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+    final textTheme = Theme.of(context).textTheme;
+    return Scaffold(
+      body: Consumer<AuthViewModel>(
+        builder: (context, value, child) {
+
+          return Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                /// Avatar + Nom
+                Center(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: AppColors.primaryColor,
+                        child: Text(
+                          getUserInitials( "AB"),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                         "Domus CI",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          Row(
-            children: [
-              _stat('${user.listingsCount}', 'Annonces'),
-              const SizedBox(width: 10),
-              _stat('${user.favoritesCount}', 'Favoris'),
-              const SizedBox(width: 10),
-              _stat('${user.visitsCount}', 'Visites'),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          _menuTile(context, Lucide.building_2, 'Mes annonces', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ListingsView()))),
-          _menuTile(context, Lucide.history, 'Historique', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const HistoryView()))),
-          _menuTile(context, Lucide.wallet, 'Paiements', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PaymentsView()))),
-          _menuTile(context, Lucide.settings, 'Paramètres', () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SettingsView()))),
-          const SizedBox(height: AppSpacing.md),
-          SecondaryButton(
-            label: 'Déconnexion',
-            icon: Lucide.log_out,
-            color: AppColors.error,
-            onPressed: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => const LoginView()), (r) => false),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _stat(String value, String label) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(color: Colors.white, border: Border.all(color: AppColors.border), borderRadius: BorderRadius.circular(16)),
-        child: Column(
-          children: [
-            Text(value, style: AppTextStyles.h3.copyWith(color: AppColors.primary)),
-            Text(label, style: AppTextStyles.caption),
-          ],
-        ),
-      ),
-    );
-  }
+                const SizedBox(height: 30),
 
-  Widget _menuTile(BuildContext context, String icon, String label, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: AppColors.border))),
-        child: Row(
-          children: [
-            Container(
-              width: 38,
-              height: 38,
-              decoration: BoxDecoration(color: AppColors.background, borderRadius: BorderRadius.circular(12)),
-              child: Iconify(icon, size: 17, color: AppColors.primary),
+                /// Container Informations
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? AppColors.black2 : AppColors.lighgrey,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      /// Adresse
+                      Text(
+                        "Adresse",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                         "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+
+                      const SizedBox(height: 16),
+                      Divider(color: Colors.grey.withOpacity(0.2)),
+                      const SizedBox(height: 16),
+
+                      /// Email
+                      Text(
+                        "Email",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+
+                      const SizedBox(height: 16),
+                      Divider(color: Colors.grey.withOpacity(0.2)),
+                      const SizedBox(height: 16),
+
+                      /// Téléphone
+                      Text(
+                        "Téléphone",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.grey),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],            ),
+          );
+        },
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+          child: SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: PrimaryButton(
+              title: "Se désenroler",
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (context) {
+                    // Créer une GlobalKey pour le formulaire dans le dialog
+                    final formKey = GlobalKey<FormState>();
+                    final TextEditingController numeroContribuableController = TextEditingController();
+
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      title: Text(
+                        'Prière rentrez un commentaire.',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.black,
+                        ),
+                      ),
+                      content: Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              // controller: assistanceViewModel.commentaireController,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                hintText: "",
+                                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                                labelText: "Votre commentaire",
+                                labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                        color: AppColors.primaryColor
+                                    )
+
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            SizedBox(
+                              width: double.infinity,
+                              child: PrimaryButton(
+                                onPressed: () async {
+                                  /**
+                                   * Logique pour désenroler le marchand
+                                   */
+                                  if (formKey.currentState!.validate()) {
+                                    // context.push(AppRouteName.page, extra: const OnBoardingView());
+                                  }
+
+                                },
+                                title: 'Valider',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
-            const SizedBox(width: 14),
-            Expanded(child: Text(label, style: AppTextStyles.bodyMd.copyWith(fontWeight: FontWeight.w600))),
-            const Iconify(Lucide.chevron_right, size: 16, color: AppColors.textSecondary),
-          ],
+            // child: ElevatedButton.icon(
+            //   icon: const Icon(Icons.logout),
+            //   label: const Text("Se déconnecter"),
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.red,
+            //   ),
+            //   onPressed: () {
+            //     Navigator.of(context).pushNamedAndRemoveUntil(
+            //       '/login',
+            //           (route) => false,
+            //     );
+            //   },
+            // ),
+          ),
         ),
       ),
+
     );
   }
 }
+String getUserInitials(String? userMerchantName) {
+  if (userMerchantName == null || userMerchantName.isEmpty) return "";
+
+  // Découper le nom par les espaces
+  final words = userMerchantName.split(' ');
+
+  // Prendre la première lettre de chaque mot
+  final initials = words.map((word) => word.isNotEmpty ? word[0].toUpperCase() : '').join();
+
+  // Si tu veux seulement les deux premières lettres (deux premiers mots)
+  return initials.length > 2 ? initials.substring(0, 3) : initials;
+}
+
+

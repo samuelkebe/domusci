@@ -1,56 +1,70 @@
+import 'package:domusci/models/bien_immobilier_model.dart';
 import 'package:flutter/foundation.dart';
 import '../exception/app_exception.dart';
+import '../models/enum/statut_bien_immobilier.dart';
+import '../models/enum/type_bien_immobilier.dart';
 import '../models/property.dart';
 import '../utils/view_state.dart';
-import '../web-services/mock/mock_properties.dart';
-import '../web-services/property_service.dart';
 
 /// ViewModel — Écran d'Accueil (catégories, quartiers, biens recommandés).
 class HomeViewModel extends ChangeNotifier {
-  final PropertyService _service;
-  HomeViewModel({PropertyService? service}) : _service = service ?? PropertyService();
 
-  ViewState state = ViewState.idle;
-  String? errorMessage;
-  List<Property> recommended = [];
-  int selectedCategoryIndex = 0;
+  BienImmobilier? selectedBienImmobilier;
+  bool isLoadingBienImmobiliers = false;
 
-  List<String> get quartiers => MockProperties.quartiers;
-
-  bool get isLoading => state == ViewState.loading;
-
-  Future<void> loadHome() async {
-    state = ViewState.loading;
+  void setSelectedBienImmobilier(BienImmobilier bienImmobilier) {
+    selectedBienImmobilier = bienImmobilier;
     notifyListeners();
-    try {
-      recommended = await _service.fetchRecommended();
-      state = ViewState.loaded;
-    } on AppException catch (e) {
-      errorMessage = e.message;
-      state = ViewState.error;
-    } catch (_) {
-      errorMessage = 'Impossible de charger les biens recommandés.';
-      state = ViewState.error;
+  }
+
+  List<BienImmobilier> bienImmobiliers = [];
+  List<BienImmobilier> filteredBienImmobiliers = [];
+  String searchQuery = '';
+
+  void updateSearchQueryBiensImmobiliers(String query) {
+    searchQuery = query;
+
+    if (query.isEmpty) {
+      filteredBienImmobiliers = bienImmobiliers;
+    } else {
+      filteredBienImmobiliers = bienImmobiliers.where((bien) {
+        final fullName = "${bien.titre} " "${bien.adresse}".toLowerCase();
+        return fullName.contains(query.toLowerCase());
+      }).toList();
     }
+
     notifyListeners();
   }
 
-  Future<void> refresh() => loadHome();
+  Future<void> getBienImmobiliers() async{
+    bienImmobiliers = [
+      BienImmobilier(
+        adresse: "COCODY",
+        titre: "VILLA COCODY",
+        prix: 350000000,
+        imageUrl: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
+        chambres: "3",
+        sallesDeBain: "2",
+        parking: 1,
+        typeBien: TypeBienImmobilier.appartement,
+        statut: StatutBienImmobilier.DISPONIBLE,
+      ),
+      BienImmobilier(
+        adresse: "COCODY",
+        titre: "VILLA COCODY",
+        prix: 350000000,
+        imageUrl: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
+        chambres: "3",
+        sallesDeBain: "2",
+        parking: 1,
+        typeBien: TypeBienImmobilier.appartement,
+        statut: StatutBienImmobilier.DISPONIBLE,
+      ),
 
-  void selectCategory(int index) {
-    selectedCategoryIndex = index;
+    ];
+    filteredBienImmobiliers = bienImmobiliers;
     notifyListeners();
   }
 
-  Future<void> toggleFavorite(Property property) async {
-    property.isFavorite = !property.isFavorite;
-    notifyListeners();
-    try {
-      await _service.toggleFavorite(property.id);
-    } catch (_) {
-      // rollback en cas d'échec réseau
-      property.isFavorite = !property.isFavorite;
-      notifyListeners();
-    }
-  }
+
 }

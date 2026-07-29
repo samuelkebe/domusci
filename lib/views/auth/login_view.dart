@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/lucide.dart';
@@ -224,31 +225,31 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Align(
                         alignment: Alignment.center,
-                        // child: Row(
-                        //   mainAxisSize: MainAxisSize.min,
-                        //   children: [
-                        //     Text(
-                        //       'Unitec',
-                        //       style: Theme.of(context).textTheme.titleLarge
-                        //           ?.copyWith(
-                        //         fontWeight: FontWeight.bold,
-                        //         fontSize: 30,
-                        //         color: AppColors.primaryColor,
-                        //       ),
-                        //     ),
-                        //     SizedBox(width: 8),
-                        //     Icon(
-                        //       CupertinoIcons.bag,
-                        //       size: 50,
-                        //       color: AppColors.primaryColor,
-                        //     ),
-                        //   ],
-                        // ),
-                        child: Image.asset(
-                          'assets/images/unitec-logo.jpg',
-                          width: 200,
-                          height: 100,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Domus CI',
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                color: AppColors.primary,
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Icon(
+                              CupertinoIcons.home,
+                              size: 50,
+                              color: AppColors.primary,
+                            ),
+                          ],
                         ),
+                        // child: Image.asset(
+                        //   'assets/images/unitec-logo.jpg',
+                        //   width: 200,
+                        //   height: 100,
+                        // ),
                       ),
                       const SizedBox(height: 50),
 
@@ -347,7 +348,7 @@ class _LoginViewState extends State<LoginView> {
                               // context.push(AppRouteName.inscription);
                             },
                             child: Text(
-                              "Se connecter.",
+                              "S'enrôler.",
                               style: Theme.of(context).textTheme.bodyMedium
                                   ?.copyWith(
                                 fontSize: 14,

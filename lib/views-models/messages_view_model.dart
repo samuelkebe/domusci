@@ -5,8 +5,6 @@ import '../web-services/message_service.dart';
 
 /// ViewModel — Messages / conversations.
 class MessagesViewModel extends ChangeNotifier {
-  final MessageService _service;
-  MessagesViewModel({MessageService? service}) : _service = service ?? MessageService();
 
   ViewState state = ViewState.idle;
   List<Conversation> conversations = [];
@@ -16,7 +14,7 @@ class MessagesViewModel extends ChangeNotifier {
   Future<void> load() async {
     state = ViewState.loading;
     notifyListeners();
-    conversations = await _service.fetchConversations();
+    // conversations = await _service.fetchConversations();
     state = ViewState.loaded;
     notifyListeners();
   }

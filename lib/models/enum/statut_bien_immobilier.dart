@@ -1,24 +1,22 @@
 enum StatutBienImmobilier {
-  disponible,
-  vendu,
-  loue,
-  en_attente,
-  reserve,
+  DISPONIBLE,
+  VENDU,
+  LOUE,
+  RESERVE,
   ;
 
   static StatutBienImmobilier? fromString(String? statut) {
     if (statut == null) return null;
     switch (statut.toLowerCase()) {
-      case "disponible":
-        return StatutBienImmobilier.disponible;
-      case "vendu":
-        return StatutBienImmobilier.vendu;
-      case "loue":
-        return StatutBienImmobilier.loue;
-      case "en_attente":
-        return StatutBienImmobilier.en_attente;
-      case "reserve":
-        return StatutBienImmobilier.reserve;
+      case "DISPONIBLE":
+        return StatutBienImmobilier.DISPONIBLE;
+      case "VENDU":
+        return StatutBienImmobilier.VENDU;
+      case "LOUE":
+        return StatutBienImmobilier.LOUE;
+    
+      case "RESERVE":
+        return StatutBienImmobilier.RESERVE;
       default:
         return null;
     }
@@ -26,15 +24,13 @@ enum StatutBienImmobilier {
 
   String get displayName {
     switch (this) {
-      case StatutBienImmobilier.disponible:
-        return "Disponible";
-      case StatutBienImmobilier.vendu:
-        return "Vendu";
-      case StatutBienImmobilier.loue:
-        return "Loué";
-      case StatutBienImmobilier.en_attente:
-        return "En attente";
-      case StatutBienImmobilier.reserve:
+      case StatutBienImmobilier.DISPONIBLE:
+        return "DISPONIBLE";
+      case StatutBienImmobilier.VENDU:
+        return "VENDU";
+      case StatutBienImmobilier.LOUE:
+        return "LOUE";
+      case StatutBienImmobilier.RESERVE:
         return "Réservé";
     }
   }

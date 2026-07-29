@@ -13,8 +13,8 @@ class BienImmobilier {
   String? devise;
   double? surface;
   String? uniteSurface;
-  int? chambres;
-  int? sallesDeBain;
+  String? chambres;
+  String? sallesDeBain;
   int? parking;
   TypeBienImmobilier? typeBien;
   StatutBienImmobilier? statut;

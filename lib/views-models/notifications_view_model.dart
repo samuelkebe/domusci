@@ -5,8 +5,6 @@ import '../web-services/notification_service.dart';
 
 /// ViewModel — Notifications.
 class NotificationsViewModel extends ChangeNotifier {
-  final NotificationService _service;
-  NotificationsViewModel({NotificationService? service}) : _service = service ?? NotificationService();
 
   ViewState state = ViewState.idle;
   List<NotificationItem> notifications = [];
@@ -17,7 +15,7 @@ class NotificationsViewModel extends ChangeNotifier {
   Future<void> load() async {
     state = ViewState.loading;
     notifyListeners();
-    notifications = await _service.fetchAll();
+    // notifications = await _service.fetchAll();
     state = ViewState.loaded;
     notifyListeners();
   }
