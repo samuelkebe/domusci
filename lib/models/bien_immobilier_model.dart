@@ -1,5 +1,6 @@
+import 'package:domusci/models/type_bien.dart';
+
 import 'enum/statut_bien_immobilier.dart';
-import 'enum/type_bien_immobilier.dart';
 
 class BienImmobilier {
   int? id;
@@ -19,6 +20,7 @@ class BienImmobilier {
   TypeBienImmobilier? typeBien;
   StatutBienImmobilier? statut;
   String? imageUrl;
+  final List<String>? photos;
   String? proprietaire;
   String? contactProprietaire;
   DateTime? datePublication;
@@ -44,6 +46,7 @@ class BienImmobilier {
     this.chambres,
     this.sallesDeBain,
     this.parking,
+    this.photos,
     this.typeBien,
     this.statut,
     this.imageUrl,
@@ -75,7 +78,7 @@ class BienImmobilier {
       sallesDeBain: json['sallesDeBain'],
       parking: json['parking'],
       typeBien: json['typeBien'] != null
-          ? TypeBienImmobilier.fromString(json['typeBien'])
+          ? TypeBienImmobilier.fromJson(json['typeBien'])
           : null,
       statut: json['statut'] != null
           ? StatutBienImmobilier.fromString(json['statut'])
@@ -115,7 +118,7 @@ class BienImmobilier {
       'chambres': chambres,
       'sallesDeBain': sallesDeBain,
       'parking': parking,
-      'typeBien': typeBien?.name,
+      'typeBien': typeBien,
       'statut': statut?.name,
       'imageUrl': imageUrl,
       'proprietaire': proprietaire,

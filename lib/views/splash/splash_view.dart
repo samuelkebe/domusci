@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/lucide.dart';
-import '../../ressources/app_colors.dart';
+import '../../resources/color.dart';
 import '../../ressources/app_strings.dart';
 import '../onboarding/onboarding_view.dart';
 
@@ -14,10 +14,20 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
-  late final Animation<double> _scale = CurvedAnimation(parent: _controller, curve: Curves.easeOutBack);
-  late final Animation<double> _fade = CurvedAnimation(parent: _controller, curve: const Interval(0, 0.6, curve: Curves.easeIn));
+class _SplashViewState extends State<SplashView>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 900),
+  );
+  late final Animation<double> _scale = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeOutBack,
+  );
+  late final Animation<double> _fade = CurvedAnimation(
+    parent: _controller,
+    curve: const Interval(0, 0.6, curve: Curves.easeIn),
+  );
 
   @override
   void initState() {
@@ -29,7 +39,8 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
           PageRouteBuilder(
             transitionDuration: const Duration(milliseconds: 500),
             pageBuilder: (_, __, ___) => const OnboardingView(),
-            transitionsBuilder: (_, anim, __, child) => FadeTransition(opacity: anim, child: child),
+            transitionsBuilder: (_, anim, __, child) =>
+                FadeTransition(opacity: anim, child: child),
           ),
         );
       }
@@ -46,18 +57,41 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(gradient: AppColors.splashGradient),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFEAF5DE), // Fond dégradé verdâtre doux en haut
+              Color(0xFFF7FAF2),
+            ],
+          ),
+        ),
         child: Stack(
           children: [
             Positioned(
               top: -90,
               right: -90,
-              child: Container(width: 340, height: 340, decoration: BoxDecoration(color: Colors.white.withOpacity(0.06), shape: BoxShape.circle)),
+              child: Container(
+                width: 340,
+                height: 340,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.06),
+                  shape: BoxShape.circle,
+                ),
+              ),
             ),
             Positioned(
               bottom: -60,
               left: -60,
-              child: Container(width: 220, height: 220, decoration: BoxDecoration(color: Colors.white.withOpacity(0.05), shape: BoxShape.circle)),
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.05),
+                  shape: BoxShape.circle,
+                ),
+              ),
             ),
             Center(
               child: FadeTransition(
@@ -73,24 +107,50 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.14),
                           borderRadius: BorderRadius.circular(26),
-                          border: Border.all(color: Colors.white.withOpacity(0.25)),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.25),
+                          ),
                         ),
-                        child: const Iconify(Lucide.building_2, size: 40, color: Colors.white),
+                        child: const Iconify(
+                          Lucide.building_2,
+                          size: 40,
+                          color: Colors.black,
+                        ),
                       ),
                       const SizedBox(height: 22),
                       RichText(
-                        text: const TextSpan(
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800, letterSpacing: -0.5, fontFamily: 'Inter'),
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                              ),
                           children: [
-                            TextSpan(text: 'Domus ', style: TextStyle(color: Colors.white)),
-                            TextSpan(text: 'CI', style: TextStyle(color: AppColors.tertiary)),
+                            TextSpan(
+                              text: 'Domus ',
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  color: AppColors.black,
+                                fontWeight: FontWeight.bold,
+
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'CI',
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: AppColors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        AppStrings.slogan,
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.85)),
+                        "L'immobilier d'Abidjan, en toute confiance.",
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: AppColors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -108,7 +168,10 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                     margin: const EdgeInsets.symmetric(horizontal: 3),
                     width: 7,
                     height: 7,
-                    decoration: BoxDecoration(color: Colors.white.withOpacity(i == 0 ? 1 : 0.35), shape: BoxShape.circle),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(i == 0 ? 1 : 0.35),
+                      shape: BoxShape.circle,
+                    ),
                   );
                 }),
               ),

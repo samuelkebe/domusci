@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../ressources/app_colors.dart';
+import '../../components/primary_button.dart';
+import '../../resources/color.dart';
 import '../../ressources/app_strings.dart';
-import '../../ressources/app_text_styles.dart';
 import '../auth/login_view.dart';
-import '../widgets/buttons/primary_button.dart';
 
 class OnboardData {
   final String image;
@@ -34,20 +33,20 @@ class _OnboardingViewState extends State<OnboardingView> {
     OnboardData(
       image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuAxZIpOxVjpbctTG0wCzRV7VOfx9wCncBafQl7lluuLfCDEqMyuUGHqiFeyGC6AXidBV7qEJUCUf_qSTgq_ie0-jxaP6FBzybeZdIGBtpIa185hOJv2WDRsCKBqlkYe2eaWN_XvJlzl09iOsCux0AUKxryQFHVnz-Wzf_e31SyOuwDjByzK51sOH0TW0cntv_8kurPAZtI1227Q2yN5N9HKqPJv2a9iifisge2fUYyJyrKnx0nRWsr59K3yb3q3Z-x17vgMmUt1wvqC',
-      title: AppStrings.onboarding1Title,
-      description: AppStrings.onboarding1Desc,
+      title: "Trouvez votre futur logement facilement.",
+      description: "Parcourez une sélection exclusive d'appartements et de studios au cœur d'Abidjan.",
     ),
     OnboardData(
       image:
       "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1200",
-      title: AppStrings.onboarding2Title,
-      description: AppStrings.onboarding2Desc,
+      title: "Achetez votre maison en toute sécurité.",
+      description: "Des transactions accompagnées et des biens vérifiés par nos équipes.",
     ),
     OnboardData(
       image:
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200",
-      title: AppStrings.onboarding3Title,
-      description: AppStrings.onboarding3Desc,
+      title: "Publiez votre bien gratuitement.",
+      description: "Mettez votre bien en ligne en quelques minutes et touchez des milliers d'acheteurs.",
     ),
   ];
 
@@ -140,7 +139,8 @@ class _OnboardingViewState extends State<OnboardingView> {
 
                       Text(
                         page.title,
-                        style: AppTextStyles.h2.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge
+                            ?.copyWith(
                           color: Colors.white,
                         ),
                       ),
@@ -149,7 +149,8 @@ class _OnboardingViewState extends State<OnboardingView> {
 
                       Text(
                         page.description,
-                        style: AppTextStyles.bodySm.copyWith(
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
                           color: Colors.white70,
                         ),
                       ),
@@ -167,7 +168,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             height: 8,
                             decoration: BoxDecoration(
                               color: currentPage == i
-                                  ? AppColors.primary
+                                  ? AppColors.green2
                                   : Colors.white30,
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -179,7 +180,7 @@ class _OnboardingViewState extends State<OnboardingView> {
 
                       PrimaryButton(
                         title: currentPage == pages.length - 1
-                            ? AppStrings.start
+                            ? "Commencer"
                             : "Suivant",
                         onPressed: nextPage,
                       ),

@@ -9,7 +9,6 @@ import 'package:domusci/views-models/listings_view_model.dart';
 import 'package:domusci/views-models/messages_view_model.dart';
 import 'package:domusci/views-models/notifications_view_model.dart';
 import 'package:domusci/views-models/property_detail_view_model.dart';
-import 'package:domusci/views-models/publish_view_model.dart';
 import 'package:domusci/views-models/search_view_model.dart';
 import 'package:domusci/views/splash/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -36,13 +35,14 @@ class DomusCI extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MessagesViewModel()),
         ChangeNotifierProvider(create: (_) => NotificationsViewModel()),
         ChangeNotifierProvider(create: (_) => PropertyDetailViewModel()),
-        ChangeNotifierProvider(create: (_) => PublishViewModel()),
         ChangeNotifierProvider(create: (_) => SearchViewModel()),
         ChangeNotifierProvider(create: (_) => ExplorerViewModel()),
       ],
       child: MaterialApp(
         title: 'Domus CI',
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.defaultTheme,
+        darkTheme: AppTheme.defaultTheme,
         home: const SplashView(),
       ),
     );
