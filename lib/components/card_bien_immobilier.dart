@@ -1,9 +1,6 @@
 import 'package:domusci/models/bien_immobilier_model.dart';
-<<<<<<< HEAD
-=======
 import 'package:domusci/resources/color.dart';
 import 'package:domusci/utils/app_theme.dart';
->>>>>>> fb3d7ef (Refactoring)
 import 'package:flutter/material.dart';
 
 import '../utils/app_utils.dart';
@@ -57,12 +54,8 @@ class CardBienImmobilier extends StatelessWidget {
                     ),
                     child: Text(
                       bienImmobilier.statut?.name ?? "",
-<<<<<<< HEAD
-                      style: const TextStyle(
-                        fontSize: 12,
-=======
+
                       style:  Theme.of(context).textTheme.bodyMedium?.copyWith(
->>>>>>> fb3d7ef (Refactoring)
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF1E2022),
                       ),
@@ -92,7 +85,6 @@ class CardBienImmobilier extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-<<<<<<< HEAD
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -215,154 +207,11 @@ class CardBienImmobilier extends StatelessWidget {
             ),
           ),
         ],
-=======
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-
-                    Expanded(
-                      child: Text(
-                        bienImmobilier.titre ?? "",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF1E2022),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 8),
-
-                    Text(
-                      formatAmount(bienImmobilier.prix),
-                      maxLines: 1,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 12),
-
-                Wrap(
-                  spacing: 6,
-                  runSpacing: 6,
-                  children: [
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F8),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.04),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.location_on_outlined,
-                            size: 14,
-                            color: Color(0xFF5F6368),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            bienImmobilier.adresse ?? "",
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F8),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.04),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.king_bed_outlined,
-                            size: 14,
-                            color: Color(0xFF5F6368),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            bienImmobilier.chambres ?? "",
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF5F6F8),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.04),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.bathtub_outlined,
-                            size: 14,
-                            color: Color(0xFF5F6368),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            bienImmobilier.sallesDeBain ?? "",
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  ],
-                ),
-
-              ],
-            ),
-          )        ],
->>>>>>> fb3d7ef (Refactoring)
       ),
     );
+
+
+
 
   }
 }

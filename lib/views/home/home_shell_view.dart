@@ -22,11 +22,11 @@ class HomeShellView extends StatefulWidget {
 class _HomeShellViewState extends State<HomeShellView> {
   int _index = 0;
 
-  void _openPublish() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const PublishView()),
-    );
-  }
+  // void _openPublish() {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(builder: (_) => const PublishView()),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,9 @@ class _HomeShellViewState extends State<HomeShellView> {
           bottomNavigationBar: GlassBottomNavBar(
             currentIndex: _index,
             onTap: (index) => setState(() => _index = index),
-            onPublishTap: _openPublish,
+            onPublishTap: () {
+
+            },
           ),
         ),
       ),

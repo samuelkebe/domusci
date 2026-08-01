@@ -5,6 +5,7 @@ import '../../components/primary_button.dart';
 import '../../components/secondary_button.dart';
 import '../../resources/color.dart';
 import '../../utils/app_utils.dart';
+import '../3d/immersive_3d_view.dart';
 
 class DetailBienView extends StatefulWidget {
   final BienImmobilier bienImmobilier;
@@ -467,9 +468,16 @@ class _DetailBienViewState extends State<DetailBienView> with SingleTickerProvid
                               children: [
                                 Expanded(
                                   child: SecondaryButton(
-                                    title: "Visite 3D",
+                                    title: "Visiter en 3D",
                                     onPressed: () {
-                                      // context.push(AppRouteName.inscription);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Immersive3DView(
+                                            bienImmobilier: bien,
+                                          ),
+                                        ),
+                                      );
                                     },
                                   ),
                                 ),

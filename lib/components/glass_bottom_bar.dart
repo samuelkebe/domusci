@@ -20,65 +20,101 @@ class GlassBottomNavBar extends StatefulWidget {
 class _GlassBottomNavBarState extends State<GlassBottomNavBar> {
   bool _publishPressed = false;
 
-  static const _accentDark = Color(0xFF1E2022);
-  static const _inactive = Color(0xFF9AA39A);
-  static const _pillColor = Color(0xFFEAF5DE);
-  static const List<Color> _fabGradient = [
-    Color(0xFF7BC96F),
-    Color(0xFF3E8E41),
-  ];
-
-  static const List _items = [
-    [Icons.home_outlined, Icons.home_rounded, ''],
-    [Icons.settings_outlined, Icons.settings_rounded, ''],
-  ];
-
-  void _handleTap(int index) {
-    if (index == widget.currentIndex) return;
-    HapticFeedback.selectionClick();
-    widget.onTap(index);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    const accentDark = Color(0xFF1E2022);
+    const inactive = Color(0xFF9AA39A);
+    const pillColor = Color(0xFFEAF5DE);
+    const fabGradient = [Color(0xFF7BC96F), Color(0xFF3E8E41)];
+    
+    final navItems = [
+      {'icon': Icons.home_outlined, 'iconFilled': Icons.home_rounded, 'label': 'Accueil'},
+      {'icon': Icons.settings_outlined, 'iconFilled': Icons.settings_rounded, 'label': 'Paramètres'},
+    ];
+
+    return SafeArea( 
       top: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
         child: SizedBox(
-          height: 82,
+          height: 80,
           child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
             children: [
-              Container(
-                height: 68,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(34),
-                  border: Border.all(color: Colors.white, width: 1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: _accentDark.withOpacity(0.08),
-                      blurRadius: 24,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(34),
+              Positioned.fill(
+                child: Container(
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.95),
+                    borderRadius: BorderRadius.circular(32),
+                    boxShadow: [
+                      BoxShadow(
+                        color: accentDark.withOpacity(0.08),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildNavItem(0),
-                      const SizedBox(width: 50),
-                      _buildNavItem(1),
-                    ],
+                    children: List.generate(navItems.length, (index) {
+                      final isSelected = widget.currentIndex == index;
+                      final item = navItems[index];
+                      
+                      return Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (widget.currentIndex != index) {
+                              HapticFeedback.selectionClick();
+                              widget.onTap(index);
+                            }
+                          },
+                          child: Container(
+                            height: double.infinity,
+                            alignment: Alignment.center,
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 250),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: isSelected ? 20 : 0,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected ? pillColor : Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    isSelected ? item['iconFilled'] as IconData : item['icon'] as IconData,
+                                    size: 24,
+                                    color: isSelected ? accentDark : inactive,
+                                  ),
+                                  if (isSelected) ...[
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      item['label'] as String,
+                                      style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: accentDark,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                 ),
               ),
               Positioned(
-                bottom: 40,
+                bottom: 32,
                 child: GestureDetector(
                   onTapDown: (_) => setState(() => _publishPressed = true),
                   onTapUp: (_) => setState(() => _publishPressed = false),
@@ -88,25 +124,24 @@ class _GlassBottomNavBarState extends State<GlassBottomNavBar> {
                     widget.onPublishTap();
                   },
                   child: AnimatedScale(
-                    scale: _publishPressed ? 0.9 : 1.0,
+                    scale: _publishPressed ? 0.92 : 1.0,
                     duration: const Duration(milliseconds: 120),
                     curve: Curves.easeOut,
                     child: Container(
-                      width: 58,
-                      height: 58,
+                      width: 56,
+                      height: 56,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          colors: _fabGradient,
+                          colors: fabGradient,
                         ),
-                        border: Border.all(color: Colors.white, width: 3),
                         boxShadow: [
                           BoxShadow(
-                            color: _fabGradient.last.withOpacity(0.45),
-                            blurRadius: 18,
-                            offset: const Offset(0, 8),
+                            color: fabGradient[1].withOpacity(0.4),
+                            blurRadius: 16,
+                            offset: const Offset(0, 6),
                           ),
                         ],
                       ),
@@ -118,59 +153,6 @@ class _GlassBottomNavBarState extends State<GlassBottomNavBar> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index) {
-    final selected = widget.currentIndex == index;
-
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => _handleTap(index),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 280),
-          curve: Curves.easeOutCubic,
-          padding: EdgeInsets.symmetric(
-            horizontal: selected ? 14 : 8,
-            vertical: 10,
-          ),
-          decoration: BoxDecoration(
-            color: selected ? _pillColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                selected ? _items[index][1] as IconData : _items[index][0] as IconData,
-                size: 22,
-                color: selected ? _accentDark : _inactive,
-              ),
-              AnimatedSize(
-                duration: const Duration(milliseconds: 220),
-                curve: Curves.easeOutCubic,
-                child: selected
-                    ? Padding(
-                  padding: const EdgeInsets.only(left: 6),
-                  child: Text(
-                    _items[index][2] as String,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: _accentDark,
-                    ),
-                  ),
-                )
-                    : const SizedBox.shrink(),
               ),
             ],
           ),
