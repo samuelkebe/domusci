@@ -1,3 +1,4 @@
-# domusci
+# Pisso
 
-Propotype d'applications de bien immobiliers.
+Prototype d'une Plateforme de diffusion et de commercialisation des biens immobiliers.
+
