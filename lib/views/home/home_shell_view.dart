@@ -61,7 +61,9 @@ class _HomeShellViewState extends State<HomeShellView> {
             currentIndex: _index,
             onTap: (index) => setState(() => _index = index),
             onPublishTap: () {
-
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PublishView()),
+              );
             },
           ),
         ),

@@ -9,6 +9,7 @@ import '../../components/card_bien_immobilier.dart';
 import '../../models/enum/statut_bien_immobilier.dart';
 import '../../resources/color.dart';
 import '../../views-models/home_view_model.dart';
+import '../menu/menu_view.dart';
 import '../profile/profile_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -32,6 +33,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: MenuView(),
+      ),
       body: Consumer<HomeViewModel>(
         builder: (context, value, child) {
           return Stack(
@@ -67,7 +71,9 @@ class _HomeViewState extends State<HomeView> {
                             Row(
                               children: [
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Scaffold.of(context).openDrawer();
+                                  },
                                   borderRadius: BorderRadius.circular(24),
                                   child: Container(
                                     width: 46,
@@ -312,10 +318,7 @@ class _HomeViewState extends State<HomeView> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         type.libelle ?? "",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
+                                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: const Color(0xFF1E2022),
                                         ),

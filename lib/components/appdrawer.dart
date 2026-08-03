@@ -1,6 +1,6 @@
-
-
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+
 import '../resources/color.dart';
 
 
@@ -80,7 +80,7 @@ class AppDrawer extends StatelessWidget {
                       // context.push(AppRouteName.page, extra: const ProfilView());
                     },
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    hoverColor: AppColors.lighgrey.withOpacity(0.3),
+                    // hoverColor: AppColors.lighgrey.withOpacity(0.3),
                   ),
 
                   const Divider(height: 32, thickness: 1),
@@ -95,7 +95,7 @@ class AppDrawer extends StatelessWidget {
                       // context.go(AppRouteName.login);
                     },
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    hoverColor: AppColors.lighgrey.withOpacity(0.3),
+                    // hoverColor: AppColors.lighgrey.withOpacity(0.3),
                   ),
                 ],
               ),

@@ -92,28 +92,17 @@ class CardBienImmobilier extends StatelessWidget {
                     children: [
                       Text(
                         bienImmobilier.titre ?? "",
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style:  Theme.of(context).textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1E2022),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF7FAF2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          formatAmount(bienImmobilier.prix),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1E2022),
-                          ),
+                      Text(
+                        formatAmount(bienImmobilier.prix),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1E2022),
                         ),
                       ),
                     ],

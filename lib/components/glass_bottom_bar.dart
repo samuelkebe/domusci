@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class GlassBottomNavBar extends StatefulWidget {
+class GlassBottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
   final VoidCallback onPublishTap;
@@ -13,149 +13,110 @@ class GlassBottomNavBar extends StatefulWidget {
     required this.onPublishTap,
   });
 
-  @override
-  State<GlassBottomNavBar> createState() => _GlassBottomNavBarState();
-}
+  static const _accentDark = Color(0xFF1E2022);
+  static const _inactive = Color(0xFF9AA39A);
+  static const _fabGradient = [Color(0xFF6FA83A), Color(0xFF4A7A2A)];
 
-class _GlassBottomNavBarState extends State<GlassBottomNavBar> {
-  bool _publishPressed = false;
+  static const _navItems = [
+    (icon: Icons.home_outlined, iconFilled: Icons.home_rounded, label: 'Accueil'),
+    (icon: Icons.settings_outlined, iconFilled: Icons.settings_rounded, label: 'Paramètres'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    const accentDark = Color(0xFF1E2022);
-    const inactive = Color(0xFF9AA39A);
-    const pillColor = Color(0xFFEAF5DE);
-    const fabGradient = [Color(0xFF7BC96F), Color(0xFF3E8E41)];
-    
-    final navItems = [
-      {'icon': Icons.home_outlined, 'iconFilled': Icons.home_rounded, 'label': 'Accueil'},
-      {'icon': Icons.settings_outlined, 'iconFilled': Icons.settings_rounded, 'label': 'Paramètres'},
-    ];
-
-    return SafeArea( 
+    return SafeArea(
       top: false,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-        child: SizedBox(
-          height: 80,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.bottomCenter,
-            children: [
-              Positioned.fill(
-                child: Container(
-                  height: 64,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.95),
-                    borderRadius: BorderRadius.circular(32),
-                    boxShadow: [
-                      BoxShadow(
-                        color: accentDark.withOpacity(0.08),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(navItems.length, (index) {
-                      final isSelected = widget.currentIndex == index;
-                      final item = navItems[index];
-                      
-                      return Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (widget.currentIndex != index) {
-                              HapticFeedback.selectionClick();
-                              widget.onTap(index);
-                            }
-                          },
-                          child: Container(
-                            height: double.infinity,
-                            alignment: Alignment.center,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 250),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: isSelected ? 20 : 0,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: isSelected ? pillColor : Colors.transparent,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    isSelected ? item['iconFilled'] as IconData : item['icon'] as IconData,
-                                    size: 24,
-                                    color: isSelected ? accentDark : inactive,
-                                  ),
-                                  if (isSelected) ...[
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      item['label'] as String,
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
-                                        color: accentDark,
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 32,
-                child: GestureDetector(
-                  onTapDown: (_) => setState(() => _publishPressed = true),
-                  onTapUp: (_) => setState(() => _publishPressed = false),
-                  onTapCancel: () => setState(() => _publishPressed = false),
-                  onTap: () {
-                    HapticFeedback.mediumImpact();
-                    widget.onPublishTap();
-                  },
-                  child: AnimatedScale(
-                    scale: _publishPressed ? 0.92 : 1.0,
-                    duration: const Duration(milliseconds: 120),
-                    curve: Curves.easeOut,
-                    child: Container(
-                      width: 56,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: fabGradient,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: fabGradient[1].withOpacity(0.4),
-                            blurRadius: 16,
-                            offset: const Offset(0, 6),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.add_rounded,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                    ),
-                  ),
-                ),
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(top: BorderSide(color: Colors.grey[100]!)),
+        ),
+        child: Row(
+          children: [
+            Expanded(child: _NavItem(item: _navItems[0], index: 0, currentIndex: currentIndex, onTap: onTap)),
+            const SizedBox(width: 20),
+            _PublishButton(onTap: onPublishTap),
+            const SizedBox(width: 20),
+            Expanded(child: _NavItem(item: _navItems[1], index: 1, currentIndex: currentIndex, onTap: onTap)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  final ({IconData icon, IconData iconFilled, String label}) item;
+  final int index;
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
+  const _NavItem({required this.item, required this.index, required this.currentIndex, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final isSelected = currentIndex == index;
+    final color = isSelected ? GlassBottomNavBar._accentDark : GlassBottomNavBar._inactive;
+
+    return GestureDetector(
+      onTap: () {
+        if (currentIndex != index) {
+          HapticFeedback.selectionClick();
+          onTap(index);
+        }
+      },
+      behavior: HitTestBehavior.opaque,
+      child: SizedBox(
+        height: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(isSelected ? item.iconFilled : item.icon, size: 24, color: color),
+            const SizedBox(height: 4),
+            Text(
+              item.label,
+              style: TextStyle(fontSize: 11, fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500, color: color),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PublishButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const _PublishButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          HapticFeedback.mediumImpact();
+          onTap();
+        },
+        child: Ink(
+          width: 56,
+          height: 56,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: GlassBottomNavBar._fabGradient,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: GlassBottomNavBar._fabGradient[1].withOpacity(0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
+          child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
         ),
       ),
     );
