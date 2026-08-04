@@ -7,3 +7,4 @@ import '../utils/view_state.dart';
 class ListingsViewModel extends ChangeNotifier {
 
 }
+

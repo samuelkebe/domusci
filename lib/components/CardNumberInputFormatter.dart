@@ -30,3 +30,4 @@ class CardNumberInputFormatter extends TextInputFormatter {
     );
   }
 }
+

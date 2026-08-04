@@ -5,7 +5,7 @@ import 'app_icons.dart';
 final formatter = NumberFormat("#,###", "fr_FR");
 
 String formatAmount(double? amount) {
-  return amount == null ? "0 F CFA" : "${formatter.format(amount)} F CFA";
+  return amount == null ? "0 FCFA" : "${formatter.format(amount)} FCFA";
 }
 
 /// Masquer les chiffres du pan de carte en laissant les 4 derniers
@@ -219,3 +219,4 @@ extension DateFormatExt on DateTime {
           '${month.toString().padLeft(2, '0')}-'
           '${day.toString().padLeft(2, '0')}';
 }
+

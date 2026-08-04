@@ -38,3 +38,4 @@ class MapPlaceholder extends StatelessWidget {
     );
   }
 }
+

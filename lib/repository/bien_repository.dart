@@ -11,3 +11,4 @@ class BienRepository {
     return await _service.createBien(data);
   }
 }
+

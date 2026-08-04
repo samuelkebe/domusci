@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:domusci/models/bien_immobilier_model.dart';
+import 'package:pisso/models/bien_immobilier_model.dart';
 import 'package:flutter/foundation.dart';
 import '../exception/app_exception.dart';
 import '../models/enum/statut_bien_immobilier.dart';
@@ -190,4 +190,5 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+
 

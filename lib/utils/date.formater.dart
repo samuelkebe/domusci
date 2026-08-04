@@ -24,3 +24,4 @@ String formatRIB(String rib) {
 
   return "$codeBanque $codeGuichet $numeroCompte $cleRIB";
 }
+

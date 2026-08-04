@@ -1,4 +1,4 @@
-import 'package:domusci/resources/color.dart';
+import 'package:pisso/resources/color.dart';
 import 'package:flutter/material.dart';
 
 /// White, rounded Card used to group a form section, matching the
@@ -92,3 +92,4 @@ class SectionCard extends StatelessWidget {
     );
   }
 }
+

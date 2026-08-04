@@ -1,5 +1,5 @@
-import 'package:domusci/models/bien_immobilier_model.dart';
-import 'package:domusci/views/home/detail_bien_view.dart';
+import 'package:pisso/models/bien_immobilier_model.dart';
+import 'package:pisso/views/home/detail_bien_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -750,3 +750,4 @@ class _HomeViewState extends State<HomeView> {
       ),    );
   }
 }
+

@@ -19,3 +19,4 @@ class MessagesViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+

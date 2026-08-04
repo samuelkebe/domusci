@@ -1,26 +1,27 @@
-import 'package:domusci/resources/app_theme.dart';
-import 'package:domusci/utils/langue_provider.dart';
-import 'package:domusci/utils/theme_provider.dart';
-import 'package:domusci/views-models/auth_view_model.dart';
-import 'package:domusci/views-models/explore_viewmodel.dart';
-import 'package:domusci/views-models/favorites_view_model.dart';
-import 'package:domusci/views-models/home_view_model.dart';
-import 'package:domusci/views-models/listings_view_model.dart';
-import 'package:domusci/views-models/messages_view_model.dart';
-import 'package:domusci/views-models/notifications_view_model.dart';
-import 'package:domusci/views-models/property_detail_view_model.dart';
-import 'package:domusci/views-models/search_view_model.dart';
-import 'package:domusci/views/splash/splash_view.dart';
+import 'package:pisso/resources/app_theme.dart';
+import 'package:pisso/utils/langue_provider.dart';
+import 'package:pisso/utils/theme_provider.dart';
+import 'package:pisso/views-models/annonces_viewmodel.dart';
+import 'package:pisso/views-models/auth_view_model.dart';
+import 'package:pisso/views-models/explore_viewmodel.dart';
+import 'package:pisso/views-models/favorites_view_model.dart';
+import 'package:pisso/views-models/home_view_model.dart';
+import 'package:pisso/views-models/listings_view_model.dart';
+import 'package:pisso/views-models/messages_view_model.dart';
+import 'package:pisso/views-models/notifications_view_model.dart';
+import 'package:pisso/views-models/property_detail_view_model.dart';
+import 'package:pisso/views-models/search_view_model.dart';
+import 'package:pisso/views/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(const DomusCI());
+  runApp(const Pisso());
 }
 
-class DomusCI extends StatelessWidget {
-  const DomusCI({super.key});
+class Pisso extends StatelessWidget {
+  const Pisso({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class DomusCI extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PropertyDetailViewModel()),
         ChangeNotifierProvider(create: (_) => SearchViewModel()),
         ChangeNotifierProvider(create: (_) => ExplorerViewModel()),
+        ChangeNotifierProvider(create: (_) => AnnoncesViewmodel()),
       ],
       child: MaterialApp(
         title: 'Domus CI',
@@ -48,3 +50,4 @@ class DomusCI extends StatelessWidget {
     );
   }
 }
+

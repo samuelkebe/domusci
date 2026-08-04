@@ -16,3 +16,4 @@ class CurrencyFormatter {
 
   static String formatMonthly(num amount) => '${format(amount)}/mois';
 }
+

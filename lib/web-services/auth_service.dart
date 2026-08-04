@@ -41,3 +41,4 @@ class AuthService {
     await Future.delayed(const Duration(milliseconds: 600));
   }
 }
+

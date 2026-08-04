@@ -36,3 +36,4 @@ class ErrorBanner extends StatelessWidget {
     );
   }
 }
+

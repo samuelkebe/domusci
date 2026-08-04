@@ -17,3 +17,4 @@ Map<String, dynamic> decodeJwt(String token) {
 DateTime jwtTimestampToDate(int seconds) {
   return DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
 }
+

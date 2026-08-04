@@ -31,3 +31,4 @@ class NotFoundException extends AppException {
 class ServerException extends AppException {
   const ServerException([super.message = 'Une erreur est survenue, veuillez réessayer.']);
 }
+

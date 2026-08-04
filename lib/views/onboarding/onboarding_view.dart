@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../components/primary_button.dart';
 import '../../resources/color.dart';
-import '../../ressources/app_strings.dart';
 import '../auth/login_view.dart';
 
 class OnboardData {

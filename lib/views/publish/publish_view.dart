@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:domusci/components/primary_button.dart';
+import 'package:pisso/components/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -682,3 +682,4 @@ class _PublishScaffold extends StatelessWidget {
     );
   }
 }
+

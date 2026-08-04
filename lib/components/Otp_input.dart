@@ -95,3 +95,4 @@ class _OtpInputState extends State<OtpInput> {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:domusci/views/settings/settings_view.dart';
+import 'package:pisso/views/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -44,3 +44,4 @@ class PropertyDetailViewModel extends ChangeNotifier {
     }
   }
 }
+

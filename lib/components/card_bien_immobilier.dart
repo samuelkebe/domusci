@@ -1,6 +1,6 @@
-import 'package:domusci/models/bien_immobilier_model.dart';
-import 'package:domusci/resources/color.dart';
-import 'package:domusci/utils/app_theme.dart';
+import 'package:pisso/models/bien_immobilier_model.dart';
+import 'package:pisso/resources/color.dart';
+import 'package:pisso/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_utils.dart';
@@ -204,3 +204,4 @@ class CardBienImmobilier extends StatelessWidget {
 
   }
 }
+

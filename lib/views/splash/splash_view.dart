@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/lucide.dart';
 import '../../resources/color.dart';
-import '../../ressources/app_strings.dart';
 import '../onboarding/onboarding_view.dart';
 
 /// Vue — Splash Screen : logo, illustration premium, animation, slogan.
@@ -182,3 +181,4 @@ class _SplashViewState extends State<SplashView>
     );
   }
 }
+

@@ -86,3 +86,4 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 }
+

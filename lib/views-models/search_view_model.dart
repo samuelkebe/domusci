@@ -8,3 +8,4 @@ enum SearchDisplayMode { list, map }
 class SearchViewModel extends ChangeNotifier {
 
 }
+

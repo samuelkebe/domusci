@@ -15,3 +15,4 @@ class HidenBalanceWidget extends StatelessWidget {
     );
   }
 }
+

@@ -22,3 +22,4 @@ const List<CentreInteretOption> kCentresInteret = [
   CentreInteretOption('Parc', Icons.park_rounded),
   CentreInteretOption('Lieu de culte', Icons.mosque_rounded),
 ];
+

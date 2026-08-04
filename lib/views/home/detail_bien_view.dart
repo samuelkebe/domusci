@@ -1,4 +1,4 @@
-import 'package:domusci/models/bien_immobilier_model.dart';
+import 'package:pisso/models/bien_immobilier_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../components/primary_button.dart';

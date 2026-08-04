@@ -5,3 +5,4 @@ class BienService {
     return 'stub_id_${DateTime.now().millisecondsSinceEpoch}';
   }
 }
+

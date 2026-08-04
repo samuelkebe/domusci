@@ -1,4 +1,4 @@
-import 'package:domusci/models/type_bien.dart';
+import 'package:pisso/models/type_bien.dart';
 
 import 'enum/statut_bien_immobilier.dart';
 
@@ -143,3 +143,4 @@ class BienImmobilier {
     return '${prix!.toInt()} FCFA';
   }
 }
+

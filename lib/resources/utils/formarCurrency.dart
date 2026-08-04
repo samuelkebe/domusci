@@ -9,3 +9,4 @@ String formatCurrency(double number) {
   );
   return format.format(number);
 }
+

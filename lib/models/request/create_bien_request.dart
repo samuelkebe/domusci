@@ -1,4 +1,4 @@
-import 'package:domusci/models/type_bien.dart';
+import 'package:pisso/models/type_bien.dart';
 
 
 class CreateBienRequest {
@@ -78,3 +78,4 @@ class CreateBienRequest {
         'documentPaths': documentPaths,
       };
 }
+

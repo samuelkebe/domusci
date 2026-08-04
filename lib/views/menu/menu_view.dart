@@ -10,6 +10,7 @@ import '../../resources/color.dart';
 import '../../utils/langue_provider.dart';
 import '../../utils/theme_provider.dart';
 import '../../views-models/auth_view_model.dart';
+import '../annonces/annonce_view.dart';
 
 class MenuView extends StatefulWidget {
   const MenuView({super.key});
@@ -326,7 +327,9 @@ class _MenuViewState extends State<MenuView> {
                                   subtitle: isFrench
                                       ? "Gérer mes annonces"
                                       : "",
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AnnonceView()));
+                                  },
                                 ),
 
 

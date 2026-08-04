@@ -4,3 +4,4 @@ String baseUrlUdpUnitec = "http://192.168.30.12:8096/api/v1"; // adresse ip mach
 // String baseUrl = "https://bdt-unic.it-centrex.com/api/v1"; // host du backend
 
 // String? accessToken;
+

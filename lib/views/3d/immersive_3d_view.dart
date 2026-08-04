@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:domusci/models/bien_immobilier_model.dart';
+import 'package:pisso/models/bien_immobilier_model.dart';
 
 class Immersive3DView extends StatefulWidget {
   final BienImmobilier bienImmobilier;
@@ -704,3 +704,4 @@ class _Immersive3DViewState extends State<Immersive3DView> with TickerProviderSt
     );
   }
 }
+

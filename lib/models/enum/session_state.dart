@@ -9,3 +9,4 @@ enum SessionState {
   splash,
   setupPin,
 }
+

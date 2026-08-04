@@ -1,6 +1,6 @@
-import 'package:domusci/models/request/create_bien_request.dart';
-import 'package:domusci/models/type_bien.dart';
-import 'package:domusci/utils/view_state.dart';
+import 'package:pisso/models/request/create_bien_request.dart';
+import 'package:pisso/models/type_bien.dart';
+import 'package:pisso/utils/view_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -298,3 +298,4 @@ class PublishViewModel extends ChangeNotifier {
     super.dispose();
   }
 }
+

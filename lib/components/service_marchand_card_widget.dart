@@ -62,3 +62,4 @@ class ServiceMarchandCardWidget extends StatelessWidget {
     );
   }
 }
+

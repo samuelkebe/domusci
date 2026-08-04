@@ -74,3 +74,4 @@ class ResponseError {
           errors == other.errors &&
           timestamp == other.timestamp;
 }
+

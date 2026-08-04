@@ -236,7 +236,7 @@ class _LoginViewState extends State<LoginView> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                'Domus CI',
+                                'Pisso',
                                 style: Theme.of(context).textTheme.titleLarge
                                     ?.copyWith(
                                   fontWeight: FontWeight.bold,
@@ -392,3 +392,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+

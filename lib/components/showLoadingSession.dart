@@ -34,3 +34,4 @@ void showLoadingSession(BuildContext context, {String message = "Chargement en c
     ),
   );
 }
+

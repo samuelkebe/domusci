@@ -31,3 +31,4 @@ class AppUser {
     visitsCount: 128,
   );
 }
+

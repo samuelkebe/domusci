@@ -84,3 +84,4 @@ class AppIcons {
   static const String senegalTag = 'assets/icons/senegal-tag.png';
   static const String nigerTag = 'assets/icons/niger-tag.png';
 }
+

@@ -26,3 +26,4 @@ class Conversation {
     this.messages = const [],
   });
 }
+
